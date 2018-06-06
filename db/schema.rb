@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519132610) do
+ActiveRecord::Schema.define(version: 20180606134244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1222,6 +1222,7 @@ ActiveRecord::Schema.define(version: 20180519132610) do
   add_index "votes", ["signature_id"], name: "index_votes_on_signature_id", using: :btree
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_type", "voter_id", "votable_type", "votable_id"], name: "unique_voter_votable_vote", unique: true, using: :btree
 
   create_table "widget_cards", force: :cascade do |t|
     t.string   "title"
